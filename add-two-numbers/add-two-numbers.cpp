@@ -19,15 +19,13 @@ public:
         int a = (p!=NULL) ? p->val : 0;
         int b = (q!=NULL) ? q->val : 0;
         int sum = carry + a + b;
-        carry = sum/10;
-            
+        carry = sum/10;   
         res->next = new ListNode(sum%10);
         res = res->next;
         
         if(p!=NULL)
             p = p->next; 
         if(q!=NULL)
-         
             q = q->next; 
         }
         
