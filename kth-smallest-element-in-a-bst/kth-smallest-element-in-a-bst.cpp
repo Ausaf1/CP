@@ -12,7 +12,7 @@
 class Solution {
 public:
 vector<int> v;
-void inorder(TreeNode* &root)
+void inorder(TreeNode* root)
 {
     if (root == NULL)
     {
