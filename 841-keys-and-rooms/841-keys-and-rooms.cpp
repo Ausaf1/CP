@@ -12,7 +12,7 @@ public:
     
     bool canVisitAllRooms(vector<vector<int>>& rooms) {
         int n = rooms.size();
-        vector<bool> v(n+1);
+        vector<bool> v(n);
        dfs(rooms,v,0);
         for(int i = 0;i < n;i++){
             if(!v[i])
