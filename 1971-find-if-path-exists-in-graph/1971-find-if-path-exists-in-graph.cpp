@@ -15,7 +15,7 @@ public:
     bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
         vector<bool> visited(n,false);
         vector<int> adj[n];
-        for(auto edge : edges){
+        for(auto& edge : edges){
             int u = edge[0],v = edge[1];
             adj[u].push_back(v);
             adj[v].push_back(u);
