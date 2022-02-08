@@ -1,11 +1,19 @@
 class Solution {
 public:
+    //linked list concept
     int findDuplicate(vector<int>& nums) {
-      for(int i = 0; i < nums.size(); i++){
-            if(nums[abs(nums[i]) - 1] < 0)
-                return abs(nums[i]);
-            nums[abs(nums[i]) - 1] *= -1;
+        int slow=nums[0];
+        int fast=nums[0];
+        do{
+            slow=nums[slow];
+            fast=nums[nums[fast]];
+        }while(fast!=slow);
+        fast=nums[0];
+        while(fast!=slow){
+         fast=nums[fast];
+            slow=nums[slow];
         }
-        return 1;
+        return fast;
+        
     }
 };
