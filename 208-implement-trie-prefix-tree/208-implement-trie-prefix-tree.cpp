@@ -22,7 +22,7 @@ class Trie {
 public:
     struct trie{
        vector<trie*>children{vector<trie*>(26,NULL)};
-       bool iseow=false;
+       bool isTrue=false;
     }*Root,*curr;
     
     Trie() {
@@ -37,7 +37,7 @@ public:
                curr->children[c-'a']=new trie();
             curr=curr->children[c-'a'];
         }
-        curr->iseow=true;
+        curr->isTrue=true;
     }
     
     bool search(string word) {
@@ -48,7 +48,7 @@ public:
                 return false;
             curr=curr->children[c-'a'];
         }
-        return (curr->iseow);
+        return (curr->isTrue);
     }
     
     bool startsWith(string prefix) {
