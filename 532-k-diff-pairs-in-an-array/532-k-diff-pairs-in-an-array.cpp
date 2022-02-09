@@ -5,16 +5,15 @@ public:
         int count = 0;
         for(auto x : nums)
             m[x]++;
-        if(k == 0){
-            for(auto i : m){
-                if(i.second >1)
+        for(auto i : m){
+            if(k == 0){
+                if(i.second > 1)
                     count++;
             }
-            return count;
-        }
-        for(auto i : m){
-            if(m.count(i.first-k))
-                count++;
+            else{
+                if(m.count(i.first - k))
+                    count++;
+            }
         }
         return count;
     }
