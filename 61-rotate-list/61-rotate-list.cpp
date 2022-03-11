@@ -14,8 +14,7 @@ public:
         if(head == NULL || head->next == NULL || k == 0)
             return head;
         int c = 1;
-        ListNode *t = head;
-        ListNode *b = head;
+        ListNode *t = head; 
         while(t->next!=NULL){
             c++;
             t = t->next;
