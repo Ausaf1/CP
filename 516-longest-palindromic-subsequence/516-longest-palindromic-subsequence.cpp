@@ -1,22 +1,20 @@
 class Solution {
-public:
-    int dp[1001][1001];
-    int helper(string &s1, string &s, int i, int j){
-        if(i == 0 || j == 0)
-            return 0;
-        if(dp[i][j] != -1)
-            return dp[i][j];
-        if(s1[i-1] == s[j-1])
-            return dp[i][j] = 1 + helper(s1,s,i-1,j-1);
-        else
-            return dp[i][j] = max(helper(s1,s,i-1,j),helper(s1,s,i,j-1));
-    }
-    
+public: 
     int longestPalindromeSubseq(string s) {
         int n = s.length();
-        string s1 = s;
-        memset(dp,-1,sizeof(dp));
-        reverse(s1.begin(),s1.end());
-        return helper(s1,s,n,n);
+        vector<vector<int>> dp(n,vector<int>(n,1));
+        int k = 0;
+        for(int i = 2;i <= n;i++){
+            for(int j = 0;j < n-i+1;j++){
+                k = i + j - 1;
+                if(s[j] == s[k] && i == 2)
+                    dp[j][k] = 2;
+                else if(s[j] == s[k])
+                    dp[j][k] = 2 + dp[j+1][k-1];
+                else
+                    dp[j][k] = max(dp[j][k-1],dp[j+1][k]);
+            }
+        }
+        return dp[0][n-1];
     }
 };
