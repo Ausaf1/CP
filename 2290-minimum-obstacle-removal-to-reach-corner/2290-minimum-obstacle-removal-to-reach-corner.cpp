@@ -7,8 +7,10 @@ public:
         int n=grid.size();
         int m=grid[0].size();
         vector<vector<int>> dp(n,vector<int> (m,1e5+1));
-        if(grid[0][0] == 1) dp[0][0]=1;
-        else dp[0][0]=0;
+        if(grid[0][0] == 1) 
+            dp[0][0]=1;
+        else 
+            dp[0][0]=0;
         vector<pair<int,int>> pr={{1,0},{0,1},{-1,0},{0,-1}};
         queue<pair<int,int>> q;
         q.push({0,0});
