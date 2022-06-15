@@ -11,27 +11,27 @@
  */
 class Solution {
 public:
-    // Time Complexity = O(catalan number)
-    vector<TreeNode*> helper(int l, int r){
-        if(l > r)
+    vector<TreeNode*> helper(int start, int end){
+        if(start > end){
             return {NULL};
-        vector<TreeNode*> res;
-        for(int root = l;root <= r;root++){
-            vector<TreeNode*> left = helper(l,root - 1);
-            vector<TreeNode*> right = helper(root+1,r);
-            for(auto i : left){
-                for(auto j : right){
-                    TreeNode * node = new TreeNode(root);
-                    node->left = i;
-                    node->right = j;
-                    res.push_back(node);
+        }
+        vector<TreeNode*> ans;
+        for(int i = start;i <= end;i++){
+            vector<TreeNode*> left = helper(start,i-1);
+            vector<TreeNode*> right = helper(i+1,end);
+            for(auto l : left){
+                for(auto r : right){
+                    TreeNode* curr = new TreeNode(i);
+                    curr->left = l;
+                    curr->right= r;
+                    ans.push_back(curr);
                 }
             }
         }
-        return res;
+        return ans;
     }
     
     vector<TreeNode*> generateTrees(int n) {
-     return helper(1,n);   
+        return helper(1,n);
     }
 };
