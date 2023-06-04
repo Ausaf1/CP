@@ -14,11 +14,14 @@ class Solution{
     { 
     
        // Your code here
-       for(int i = 0;i < N;i++){
-           if(arr[i] == K) return 1;
+       int l = 0,r = N-1;
+       while(l <= r){
+           int mid = (l + r) >> 1;
+           if(arr[mid] == K) return 1;
+           else if(arr[mid] > K) r = mid - 1;
+           else l = mid + 1;
        }
        return -1;
-       
     }
 };
 
