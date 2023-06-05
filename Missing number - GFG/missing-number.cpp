@@ -26,10 +26,8 @@ int main()
 int missingNumber(int A[], int N)
 {
     // Your code goes here
-    int sum = 0;
-    for(int i = 0;i < N - 1;i++){
-        sum += A[i];
-    }
-    int res = (N*(N + 1)) / 2 - sum;
-    return res;
+    int xor1 = 0;
+    for(int i = 1;i <= N;i++) xor1 ^= i;
+    for(int i = 0;i < N - 1;i++) xor1 ^= A[i];
+    return xor1;
 }
