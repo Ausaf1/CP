@@ -1,18 +1,18 @@
 class Solution {
 private:
     void helper(int left,int right,string &s,int &mxLen){
-        while(left >= 0 && right < s.size() && s[left] == s[right]){
+        while(left >= 0 && right <= s.size() && s[left] == s[right]){
             if(right - left + 1 > mxLen){
                 mxLen = right - left + 1;
                 l = left;
                 r = right;
-            } 
+            }
             left--;
             right++;
         }
     }
 public:
-    int l = 0,r = 0; 
+    int l = 0,r = 0;
     string longestPalindrome(string s) {
         int n = s.length();
         if(n == 1) return s.substr(0,1);
