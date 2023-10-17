@@ -1,47 +1,30 @@
 class Solution {
+private:
+    int find(int x,vector<int> &parent){
+        if(parent[x] == x) return x;
+        return parent[x] = find(parent[x],parent);
+    }
+    bool Union(int p,int c,int &components,vector<int> &parent){
+        if(find(c,parent) != c) return false;
+        if(find(p,parent) == c) return false;
+        parent[c] = p;
+        components -= 1;
+        return true;
+    }
 public:
     bool validateBinaryTreeNodes(int n, vector<int>& leftChild, vector<int>& rightChild) {
-        unordered_map<int,int> childToPar;
-        unordered_map<int,vector<int>> adj;
+        vector<int> parent(n);
+        for(int i = 0;i < n;i++){
+            parent[i] = i;
+        }
+        int components = n;
         for(int i = 0;i < n;i++){
             int node = i;
             int leftC = leftChild[i];
             int rightC = rightChild[i];
-            if(leftC != -1){
-                adj[i].push_back(leftC);
-                if(childToPar.find(leftC) != childToPar.end()) return false;
-                childToPar[leftC] = node;
-            }
-            if(rightC != -1){
-                adj[i].push_back(rightC);
-                if(childToPar.find(rightC) != childToPar.end()) return false;
-                childToPar[rightC] = node;
-            }
+            if(leftC != -1 && Union(node,leftC,components,parent) == false) return false;
+            if(rightC != -1 && Union(node,rightC,components,parent) == false) return false;
         }
-        int root = -1;
-        for(int i = 0;i < n;i++){
-            if(childToPar.find(i) == childToPar.end()){
-                if(root != -1) return false;
-                root = i;
-            }
-        }
-        if(root == -1) return false;
-        queue<int> q;
-        q.push(root);
-        int count = 1;
-        vector<int> visited(n,false);
-        visited[root] = true;
-        while(!q.empty()){
-            int node = q.front();
-            q.pop();
-            for(auto &v : adj[node]){
-                if(!visited[v]){
-                    visited[v] = true;
-                    q.push(v);
-                    count++;
-                }
-            }
-        }
-        return count == n;
+        return components == 1;
     }
 };
